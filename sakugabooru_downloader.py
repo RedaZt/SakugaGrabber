@@ -5,7 +5,6 @@ dict_art = { "+" : "", "!" : "", "?" : "", "%" : "", "*" : "", "/" : "", "#" : "
 dict = { "+" : "", "!" : "", "?" : "", "%" : "", "*" : "", "/" : "", "#" : "", "\\": "", "&" : "and", ":" : ""}
 http = urllib3.PoolManager()
 
-
 def Filename(res, id):
     soup = bs(res.data,"html.parser")
     tags = soup.findAll('ul',id="tag-sidebar")
@@ -32,7 +31,6 @@ def Filename(res, id):
     file_name = (str(copyright) + " By " + artist + " (" + id + ')' + ext).strip()
     return file_name
 
-
 def postGrabber(id):
     link = "https://www.sakugabooru.com/post/show/"+id
     res = http.request('GET', link)
@@ -57,7 +55,6 @@ def idDownloader(link):
     os.chdir(folder)
 
     postGrabber(id)
-
 
 def bulkDownloader(link):
     limit = "&limit=100"
