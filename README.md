@@ -1,1 +1,1 @@
-# sakugabooru_downloader
+# Sakugabooru Downloader
