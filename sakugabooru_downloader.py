@@ -49,7 +49,7 @@ def postGrabber(id):
 def idDownloader(link):
     id = link.split('/')[-1]
 
-    folder = "sakugabooru_downloads" 
+    folder = "Sakugabooru Downloads" 
     if not os.path.exists(folder):
         os.mkdir(folder)
     os.chdir(folder)
