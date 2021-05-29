@@ -1,1 +1,1 @@
-# Sakugabooru Downloader
+# SakugaGrabber
