@@ -1,5 +1,5 @@
 # SakugaGrabber
-A python script to download media from [www.sakugabooru.com](https://www.sakugabooru.com).
+A python script to download media from [Sakugabooru](https://www.sakugabooru.com).
 This script helps you download Posts, Pools, and even bulk download posts that contain given tags, all you need to do is copy the link and paste it and it'll do the rest.
 
 ## Requirements
