@@ -23,7 +23,7 @@ def namingFiles(res, id : str) -> str:
     ext = soup.find('a', id="highres")["href"].split('.')[-1]
 
     artists = ' & '.join(search(infos, "tag-type-artist"))
-    copyrights = ' & '.join(search(infos, "tag-type-copyright"))
+    copyrights = ' '.join(search(infos, "tag-type-copyright"))
 
     fileName = f"{copyrights} By {artists} ({id}).{ext}".translate(str.maketrans(specialCharacters))
 
