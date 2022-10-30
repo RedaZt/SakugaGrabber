@@ -2,7 +2,17 @@ import os, re, urllib3
 from bs4 import BeautifulSoup as bs
 from typing import List
 
-specialCharacters = {'?' : '', '"' : '', '*' : '', '/' : '', '#' : '', '\\': '', ':' : '', '_' : ' ', '|' : '', '<' : '', '>' : ''}
+specialCharacters = {
+    '\\': '',
+    '/': '',
+    ':': '',
+    '*': '',
+    '?': '',
+    '"': '',
+    '<': '',
+    '>': '',
+    '|': ''
+}
 mainFolder = "Sakugabooru Downloads"
 http = urllib3.PoolManager()
 
@@ -16,7 +26,7 @@ def search(infos : List, className : str) -> List:
                     lst += [target.text]
     return lst
 
-def namingFiles(res, id : str) -> str:
+def nameFile(res, id : str) -> str:
     soup = bs(res.data,"html.parser")
     data = soup.find('ul', id="tag-sidebar")
     infos = data.findChildren('li')
@@ -29,12 +39,12 @@ def namingFiles(res, id : str) -> str:
 
     return fileName
 
-def postGrabber(folder : str, id : str):
+def grabPost(folder : str, id : str):
     link = f"https://www.sakugabooru.com/post/show/{id}"
     res = http.request('GET', link)
     mediaLink = bs(res.data, "html.parser").find('a', id="highres")["href"]
 
-    media = namingFiles(res, id)
+    media = nameFile(res, id)
     print(f"DOWNLOADING : {media}")
 
     if not os.path.exists(folder):
@@ -50,11 +60,11 @@ def postGrabber(folder : str, id : str):
 def getId(link : str) -> str:
     return re.search(r"(\d+)", link).group(1)
 
-def idDownloader(link : str):
+def downlodFromId(link : str) -> None:
     id = getId(link)
-    postGrabber(mainFolder, id)
+    grabPost(mainFolder, id)
 
-def bulkDownloader(link : str):
+def downlodBulk(link : str) -> None:
     tags = link.split("=")[-1] 
     tagsLink = f"https://www.sakugabooru.com/post.xml?tags={tags}"
     pageNumber = 1
@@ -75,12 +85,12 @@ def bulkDownloader(link : str):
         posts = soup.findAll("post")
 
         for post in posts:
-            postGrabber(mainFolder, post["id"])
+            grabPost(mainFolder, post["id"])
         
         postCount -= 100
         pageNumber += 1
 
-def poolDownloader(link : str):
+def downloadPool(link : str) -> None:
     res = http.request('GET', link)
     soup = bs(res.data, "html.parser")
     posts = soup.find_all('span', attrs={"class" : "plid"})
@@ -89,16 +99,26 @@ def poolDownloader(link : str):
     folder = f"{mainFolder}/{poolTitle}"
 
     for post in posts:
-        postGrabber(folder, getId(post.text))
+        grabPost(folder, getId(post.text))
 
 if __name__ == "__main__":
-    link = input("Paste your link here : ").strip()                   
+    links = input("Paste your links here : ").strip().split()                
+    errors = []
 
-    if "tags=" in link:
-        bulkDownloader(link)
-    elif "pool" in link: 
-        poolDownloader(link)
-    else : 
-        idDownloader(link)
+    for link in links:
+        try:
+            if "tags=" in link:
+                downlodBulk(link)
+            elif "pool" in link: 
+                downloadPool(link)
+            else : 
+                downlodFromId(link)
+        except:
+            errors += link,
+    
+    if errors:
+        with open(f"{mainFolder}/ERRORS.txt", "w+") as errorLog:
+            for link in errors:
+                errorLog.write(link + '\n')
 
     print("DONE !!")
