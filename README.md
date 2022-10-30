@@ -9,7 +9,7 @@ This script helps you download Posts, Pools, and even bulk download posts that c
 ## Usage
 * Download the latest release of "sakugagrabber.py" [here](https://github.com/RedaZt/SakugaGrabber/releases).
 * Run the script.
-* Paste your link and done.
+* Paste your links and watch it do its thing.
 
 ### Example usage
 ```
