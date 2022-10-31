@@ -13,7 +13,7 @@ This script helps you download Posts, Pools, and even bulk download posts that c
 
 ### Example usage
 ```
-Paste your link here : https://www.sakugabooru.com/post/show/142283
+Paste your links here : https://www.sakugabooru.com/post/show/142283
 DOWNLOADING : jujutsu_kaisen By kenichi kutsuna & myoun (142283).mp4
 SUCCESS : jujutsu_kaisen By kenichi kutsuna & myoun (142283).mp4
 DONE !!
