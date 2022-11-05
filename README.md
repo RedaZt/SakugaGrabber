@@ -4,7 +4,7 @@ This script helps you download posts, pools, and even bulk download posts that c
 
 ## Requirements
   * [Python 3.4+](https://www.python.org/downloads/)
-  * [bs4](https://pypi.python.org/pypi/beautifulsoup4)
+  * [Beautifulsoup4](https://pypi.python.org/pypi/beautifulsoup4)
 
 ## Usage
 * Download the latest release of "sakugagrabber.py" [here](https://github.com/RedaZt/SakugaGrabber/releases).
